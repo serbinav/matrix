@@ -1,3 +1,7 @@
+# my
+*.cache
+*.cs
+
 # Compiled Object files
 *.slo
 *.lo
