@@ -1,0 +1,6 @@
+C:\WORK\с#\matrix\matrix\bin\Debug\matrix.exe.config
+C:\WORK\с#\matrix\matrix\bin\Debug\matrix.exe
+C:\WORK\с#\matrix\matrix\bin\Debug\matrix.pdb
+C:\WORK\с#\matrix\matrix\obj\Debug\matrix.csprojResolveAssemblyReference.cache
+C:\WORK\с#\matrix\matrix\obj\Debug\matrix.exe
+C:\WORK\с#\matrix\matrix\obj\Debug\matrix.pdb
