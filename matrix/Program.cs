@@ -49,9 +49,15 @@ namespace matrix
 {
     class Program
     {
+        //
         public static int m, n;
+        //
         public static char[,] arr;
-        public static List<string> output;
+        //public static List<string> output;
+
+        public static int first, second;
+        public static char third;
+        public static int fourth;
 
         //-------------------------------------------------------------
         public static void testData()
@@ -96,6 +102,7 @@ namespace matrix
                 Console.WriteLine();
             }
         }
+
         //-------------------------------------------------------------
         public static void writeKeyboard()
         {
@@ -116,110 +123,89 @@ namespace matrix
                 Console.WriteLine();
             }
         }
+
         //-------------------------------------------------------------
-        public static void horisontal()
+        public static void findHorVert(int i, int j, char symbol)
+        {
+            if (fourth == 0)
+            {
+                first = i + 1;
+                second = j + 1;
+                third = arr[i, j];
+                fourth = 1;
+            }
+            else if (third == arr[i, j])
+            {
+                fourth = fourth + 1;
+            }
+            else if (third != arr[i, j])
+            {
+                if (fourth > 1)
+                {
+                    string dash = symbol.ToString() + " [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
+                    " " + fourth.ToString();
+                    Console.WriteLine(dash);
+                }
+                first = i + 1;
+                second = j + 1;
+                third = arr[i, j];
+                fourth = 1;
+            }
+
+            if (fourth > 1 && j + 1 == n)
+            {
+                string dash = symbol.ToString() + symbol.ToString() + " [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
+                " " + fourth.ToString();
+                Console.WriteLine(dash);
+            }
+        }
+
+        //-------------------------------------------------------------
+        public static void horisontalFind()
         {
             for (int i = 0; i < m; i++)
             {
-                int first = default(int);
-                int second = default(int);
-                char third = new char();
-                int fourth = 0;
+                first = default(int);
+                second = default(int);
+                third = new char();
+                fourth = 0;
 
                 for (int j = 0; j < n; j++)
                 {
-                    if (fourth == 0)
-                    {
-                        first = i + 1;
-                        second = j + 1;
-                        third = arr[i, j];
-                        fourth = 1;
-                    }
-                    else if (third == arr[i, j])
-                        {
-                            fourth = fourth + 1;
-                        }
-                        else if (third != arr[i, j])
-                        {
-                            if (fourth > 1) {
-                                string dash = "- [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
-                                " " + fourth.ToString();
-                                Console.WriteLine(dash);
-                            }
-                            first = i + 1;
-                            second = j + 1;
-                            third = arr[i, j];
-                            fourth = 1;
-                        }
-
-                    if (fourth > 1 && j + 1 == n)
-                    {
-                        string dash = "-- [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
-                        " " + fourth.ToString();
-                        Console.WriteLine(dash);
-                    }
+                    findHorVert(i, j, '-');
                 }
+
             }
         }
         //-------------------------------------------------------------
-        public static void vertical()
+        public static void verticalFind()
         {
             for (int j = 0; j < n; j++)
             {
-                int first = default(int);
-                int second = default(int);
-                char third = new char();
-                int fourth = 0;
+                first = default(int);
+                second = default(int);
+                third = new char();
+                fourth = 0;
 
                 for (int i = 0; i < m; i++)
                 {
-                    if (fourth == 0)
-                    {
-                        first = i + 1;
-                        second = j + 1;
-                        third = arr[i, j];
-                        fourth = 1;
-                    }
-                    else if (third == arr[i, j])
-                    {
-                        fourth = fourth + 1;
-                    }
-                    else if (third != arr[i, j])
-                    {
-                        if (fourth > 1)
-                        {
-                            string dash = "| [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
-                            " " + fourth.ToString();
-                            Console.WriteLine(dash);
-                        }
-                        first = i + 1;
-                        second = j + 1;
-                        third = arr[i, j];
-                        fourth = 1;
-                    }
-
-                    if (fourth > 1 && i + 1 == m)
-                    {
-                        string dash = "|| [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
-                        " " + fourth.ToString();
-                        Console.WriteLine(dash);
-                    }
+                    findHorVert(i, j, '|');
                 }
+
             }
         }
 
         //-------------------------------------------------------------
         public static void backslash() {
 
-            //https://toster.ru/q/421816
             //var 2
             //string diagonal = "";
             for (int k = m; k >= -m; k--)
             {
-                int first = default(int);
-                int second = default(int);
-                char third = new char();
-                int fourth = 0;
+                first = default(int);
+                second = default(int);
+                third = new char();
+                fourth = 0;
                 for (int j = 0; j < n - k; j++)
                 {
                     int i = k + j;
@@ -272,15 +258,14 @@ namespace matrix
         //-------------------------------------------------------------
         public static void slash() {
 
-            //https://toster.ru/q/421816
             //var 1
             //string diagonal = "";
             for (int k = 0; k < m * 2; k++)
             {
-                int first = default(int);
-                int second = default(int);
-                char third = new char();
-                int fourth = 0;
+                first = default(int);
+                second = default(int);
+                third = new char();
+                fourth = 0;
 
                 for (int j = 0; j <= k; j++)
                 {
@@ -337,8 +322,8 @@ namespace matrix
 
             Console.WriteLine("");
 
-            horisontal();
-            vertical();
+            horisontalFind();
+            verticalFind();
 
             backslash();// \
             slash();// /
