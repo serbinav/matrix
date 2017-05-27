@@ -49,19 +49,17 @@ namespace matrix
 {
     class Program
     {
-        //
         public static int m, n;
-        //
         public static char[,] arr;
-        //public static List<string> output;
-
-        public static int first, second;
+        public static int first, second, fourth;
         public static char third;
-        public static int fourth;
+        //public static List<string> output;
 
         //-------------------------------------------------------------
         public static void testData()
         {
+            Console.WriteLine("Тестовые данные: ");
+
             m = 4;
             Console.WriteLine("M = " + m);
             n = 5;
@@ -101,11 +99,19 @@ namespace matrix
                 }
                 Console.WriteLine();
             }
-        }
 
+            Console.WriteLine("");
+            Console.WriteLine("- [1 2] = 3");
+            Console.WriteLine("| [3 5] + 2");
+            Console.WriteLine("\\ [1 1] b 4");
+            Console.WriteLine("\\ [3 1] c 2");
+            Console.WriteLine("/ [2 5] a 3");
+            Console.WriteLine("/ [1 5] b 3");
+        }
         //-------------------------------------------------------------
         public static void writeKeyboard()
         {
+            Console.WriteLine("Введите размеры матрицы: ");
             Console.Write("M = ");
             m = int.Parse(Console.ReadLine());
             Console.Write("N = ");
@@ -113,6 +119,7 @@ namespace matrix
 
             arr = new char[m, n];
 
+            Console.WriteLine("Вводите символы: ");
             for (int i = 0; i < m; i++)
             {
                 for (int j = 0; j < n; j++)
@@ -123,9 +130,8 @@ namespace matrix
                 Console.WriteLine();
             }
         }
-
-        //-------------------------------------------------------------
-        public static void findHorVert(int i, int j, char symbol)
+        ///////////////////////////////////////////////////////////////
+        public static void findCondition(int i, int j, char symbol)
         {
             if (fourth == 0)
             {
@@ -142,26 +148,30 @@ namespace matrix
             {
                 if (fourth > 1)
                 {
-                    string dash = symbol.ToString() + " [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
-                    " " + fourth.ToString();
-                    Console.WriteLine(dash);
+                    printLimit(symbol);
                 }
                 first = i + 1;
                 second = j + 1;
                 third = arr[i, j];
                 fourth = 1;
             }
-
-            if (fourth > 1 && j + 1 == n)
-            {
-                string dash = symbol.ToString() + symbol.ToString() + " [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
-                " " + fourth.ToString();
-                Console.WriteLine(dash);
-            }
+        }
+        //-------------------------------------------------------------
+        public static void printLimit(char symbol)
+        {
+            string dash = string.Format("{0} [{1} {2}] {3} {4}", symbol, first, second, third, fourth);
+            Console.WriteLine(dash);
         }
 
+        // TODO после тестирования удалить
         //-------------------------------------------------------------
-        public static void horisontalFind()
+        public static void printDobLimit(char symbol)
+        {
+            string dash = string.Format("{0}{1} [{2} {3}] {4} {5}", symbol, symbol, first, second, third, fourth);
+            Console.WriteLine(dash);
+        }
+        //-------------------------------------------------------------
+        public static void horisontalFind(char symbol)
         {
             for (int i = 0; i < m; i++)
             {
@@ -172,13 +182,16 @@ namespace matrix
 
                 for (int j = 0; j < n; j++)
                 {
-                    findHorVert(i, j, '-');
+                    findCondition(i, j, symbol);
+                    if (fourth > 1 && j + 1 == n)
+                    {
+                        printDobLimit(symbol);
+                    }
                 }
-
             }
         }
         //-------------------------------------------------------------
-        public static void verticalFind()
+        public static void verticalFind(char symbol)
         {
             for (int j = 0; j < n; j++)
             {
@@ -189,15 +202,16 @@ namespace matrix
 
                 for (int i = 0; i < m; i++)
                 {
-                    findHorVert(i, j, '|');
+                    findCondition(i, j, symbol);
+                    if (fourth > 1 && j + 1 == n)
+                    {
+                        printDobLimit(symbol);
+                    }
                 }
-
             }
         }
-
         //-------------------------------------------------------------
-        public static void backslash() {
-
+        public static void backslash(char symbol) {
             //var 2
             //string diagonal = "";
             for (int k = m; k >= -m; k--)
@@ -214,38 +228,13 @@ namespace matrix
                     if (i < n && j < m && i >= 0 && j >= 0)
                     {
                         //diagonal += arr[j, i] + " ";
-                        if (fourth == 0)
-                        {
-                            first = j + 1;
-                            second = i + 1;
-                            third = arr[j, i];
-                            fourth = 1;
-                        }
-                        else if (third == arr[j, i])
-                        {
-                            fourth = fourth + 1;
-                        }
-                        else if (third != arr[j, i])
-                        {
-                            if (fourth > 1)
-                            {
-                                string dash = "\\ [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
-                                " " + fourth.ToString();
-                                Console.WriteLine(dash);
-                            }
-                            first = j + 1;
-                            second = i + 1;
-                            third = arr[j, i];
-                            fourth = 1;
-                        }
+                        findCondition(j, i, symbol);
                     }
                     else
                     {
                         if (fourth > 1)
                         {
-                            string dash = "\\\\ [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
-                            " " + fourth.ToString();
-                            Console.WriteLine(dash);
+                            printDobLimit(symbol);
                             break;
                         }
                     }
@@ -253,11 +242,9 @@ namespace matrix
                 //Console.WriteLine(diagonal);
                 //diagonal = "";
             }
-
         }
         //-------------------------------------------------------------
-        public static void slash() {
-
+        public static void slash(char symbol) {
             //var 1
             //string diagonal = "";
             for (int k = 0; k < m * 2; k++)
@@ -274,38 +261,13 @@ namespace matrix
                     if (i < n && j < m)
                     {
                         //diagonal += arr[j, i] + " ";
-                        if (fourth == 0)
-                        {
-                            first = j + 1;
-                            second = i + 1;
-                            third = arr[j, i];
-                            fourth = 1;
-                        }
-                        else if (third == arr[j, i])
-                        {
-                            fourth = fourth + 1;
-                        }
-                        else if (third != arr[j, i])
-                        {
-                            if (fourth > 1)
-                            {
-                                string dash = "/ [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
-                                " " + fourth.ToString();
-                                Console.WriteLine(dash);
-                            }
-                            first = j + 1;
-                            second = i + 1;
-                            third = arr[j, i];
-                            fourth = 1;
-                        }
+                        findCondition(j, i, symbol);
                     }
                     else
                     {
                         if (fourth > 1)
                         {
-                            string dash = "// [" + first.ToString() + " " + second.ToString() + "] " + third.ToString() +
-                            " " + fourth.ToString();
-                            Console.WriteLine(dash);
+                            printDobLimit(symbol);
                             break;
                         }
                     }
@@ -317,26 +279,25 @@ namespace matrix
         //-------------------------------------------------------------
         static void Main(string[] args)
         {
+            // если нужно работать с реальными данными закомментировать
             testData();
+
+            // TODO протестировать на всех одинаковых символах
+            // TODO протестировать на кирилице 
+            // TODO добавить проверки на соответствие типов данных
+
+            // если нужно работать с реальными данными раскомментировать
             //writeKeyboard();
 
-            Console.WriteLine("");
+            Console.WriteLine("");     
+            Console.WriteLine("Наши результаты: ");
 
-            horisontalFind();
-            verticalFind();
+            horisontalFind('-');
+            verticalFind('|');
+            backslash('\\');
+            slash('/');
 
-            backslash();// \
-            slash();// /
-
-            Console.WriteLine("");
-            Console.WriteLine("- [1 2] = 3");
-            Console.WriteLine("| [3 5] + 2");
-            Console.WriteLine("\\ [1 1] b 4");
-            Console.WriteLine("\\ [3 1] c 2");
-            Console.WriteLine("/ [2 5] a 3");
-            Console.WriteLine("/ [1 5] b 3");
             Console.ReadKey();
-
         }
     }
 }
