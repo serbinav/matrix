@@ -53,7 +53,8 @@ namespace matrix
         public static char[,] arr;
         public static int first, second, fourth;
         public static char third;
-        //public static List<string> output;
+        //
+        public static List<string> output;
 
         //-------------------------------------------------------------
         public static void testData()
@@ -109,7 +110,55 @@ namespace matrix
             Console.WriteLine("/ [1 5] b 3");
         }
         //-------------------------------------------------------------
-        public static void writeKeyboard()
+
+        public static void testFFFF()
+        {
+            Console.WriteLine("Тестовые данные: ");
+
+            m = 4;
+            Console.WriteLine("M = " + m);
+            n = 5;
+            Console.WriteLine("N = " + n);
+
+            arr = new char[m, n];
+
+            arr[0, 0] = 'f';
+            arr[0, 1] = 'f';
+            arr[0, 2] = 'f';
+            arr[0, 3] = 'f';
+            arr[0, 4] = 'f';
+
+            arr[1, 0] = 'f';
+            arr[1, 1] = 'f';
+            arr[1, 2] = 'f';
+            arr[1, 3] = 'f';
+            arr[1, 4] = 'f';
+
+            arr[2, 0] = 'f';
+            arr[2, 1] = 'f';
+            arr[2, 2] = 'f';
+            arr[2, 3] = 'f';
+            arr[2, 4] = 'f';
+
+            arr[3, 0] = 'f';
+            arr[3, 1] = 'f';
+            arr[3, 2] = 'f';
+            arr[3, 3] = 'f';
+            arr[3, 4] = 'f';
+
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    Console.Write(arr[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
+        }
+
+            //-------------------------------------------------------------
+            public static void writeKeyboard()
         {
             Console.WriteLine("Введите размеры матрицы: ");
             Console.Write("M = ");
@@ -203,7 +252,7 @@ namespace matrix
                 for (int i = 0; i < m; i++)
                 {
                     findCondition(i, j, symbol);
-                    if (fourth > 1 && j + 1 == n)
+                    if (fourth > 1 && i + 1 == m)
                     {
                         printDobLimit(symbol);
                     }
@@ -213,7 +262,7 @@ namespace matrix
         //-------------------------------------------------------------
         public static void backslash(char symbol) {
             //var 2
-            //string diagonal = "";
+            string diagonal = "";
             for (int k = m; k >= -m; k--)
             {
                 first = default(int);
@@ -223,11 +272,11 @@ namespace matrix
                 for (int j = 0; j < n - k; j++)
                 {
                     int i = k + j;
-                    //Console.WriteLine("arr[" + j + " ," + i + "]");
+                    Console.WriteLine("arr[" + j + " ," + i + "]");
 
                     if (i < n && j < m && i >= 0 && j >= 0)
                     {
-                        //diagonal += arr[j, i] + " ";
+                        diagonal += arr[j, i] + " ";
                         findCondition(j, i, symbol);
                     }
                     else
@@ -239,8 +288,8 @@ namespace matrix
                         }
                     }
                 }
-                //Console.WriteLine(diagonal);
-                //diagonal = "";
+                Console.WriteLine(diagonal);
+                diagonal = "";
             }
         }
         //-------------------------------------------------------------
@@ -280,7 +329,8 @@ namespace matrix
         static void Main(string[] args)
         {
             // если нужно работать с реальными данными закомментировать
-            testData();
+            //testData();
+            testFFFF();
 
             // TODO протестировать на всех одинаковых символах
             // TODO протестировать на кирилице 
@@ -292,10 +342,10 @@ namespace matrix
             Console.WriteLine("");     
             Console.WriteLine("Наши результаты: ");
 
-            horisontalFind('-');
-            verticalFind('|');
+            //horisontalFind('-');
+            //verticalFind('|');
             backslash('\\');
-            slash('/');
+            //slash('/');
 
             Console.ReadKey();
         }
