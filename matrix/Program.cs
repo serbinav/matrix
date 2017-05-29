@@ -110,7 +110,6 @@ namespace matrix
             Console.WriteLine("/ [1 5] b 3");
         }
         //-------------------------------------------------------------
-
         public static void testFFFF()
         {
             Console.WriteLine("Тестовые данные: ");
@@ -154,11 +153,9 @@ namespace matrix
                 }
                 Console.WriteLine();
             }
-
         }
-
-            //-------------------------------------------------------------
-            public static void writeKeyboard()
+        //-------------------------------------------------------------
+        public static void writeKeyboard()
         {
             Console.WriteLine("Введите размеры матрицы: ");
             Console.Write("M = ");
@@ -278,7 +275,6 @@ namespace matrix
                     {
                         //diagonal += arr[j, i] + " ";
                         findCondition(j, i, symbol);
-
                         if (fourth > 1 && j + 1 == n - k)
                         {
                             printDobLimit(symbol);
@@ -293,7 +289,6 @@ namespace matrix
                         }
                     }
                 }
-
                 //Console.WriteLine(diagonal);
                 //diagonal = "";
             }
@@ -317,6 +312,10 @@ namespace matrix
                     {
                         //diagonal += arr[j, i] + " ";
                         findCondition(j, i, symbol);
+                        if (fourth > 1 && j + 1 > k)
+                        {
+                            printDobLimit(symbol);
+                        }
                     }
                     else
                     {
@@ -335,10 +334,10 @@ namespace matrix
         static void Main(string[] args)
         {
             // если нужно работать с реальными данными закомментировать
-            //testData();
-            testFFFF();
+            testData();
+            //testFFFF();
 
-            // TODO протестировать на всех одинаковых символах
+            // TODO протестировать определение начальной точки
             // TODO протестировать на кирилице 
             // TODO добавить проверки на соответствие типов данных
 
@@ -348,10 +347,10 @@ namespace matrix
             Console.WriteLine("");     
             Console.WriteLine("Наши результаты: ");
 
-            //horisontalFind('-');
-            //verticalFind('|');
+            horisontalFind('-');
+            verticalFind('|');
             backslash('\\');
-            //slash('/');
+            slash('/');
 
             Console.ReadKey();
         }
