@@ -262,7 +262,7 @@ namespace matrix
         //-------------------------------------------------------------
         public static void backslash(char symbol) {
             //var 2
-            string diagonal = "";
+            //string diagonal = "";
             for (int k = m; k >= -m; k--)
             {
                 first = default(int);
@@ -272,12 +272,17 @@ namespace matrix
                 for (int j = 0; j < n - k; j++)
                 {
                     int i = k + j;
-                    Console.WriteLine("arr[" + j + " ," + i + "]");
+                    //Console.WriteLine("arr[" + j + " ," + i + "]");
 
                     if (i < n && j < m && i >= 0 && j >= 0)
                     {
-                        diagonal += arr[j, i] + " ";
+                        //diagonal += arr[j, i] + " ";
                         findCondition(j, i, symbol);
+
+                        if (fourth > 1 && j + 1 == n - k)
+                        {
+                            printDobLimit(symbol);
+                        }
                     }
                     else
                     {
@@ -288,8 +293,9 @@ namespace matrix
                         }
                     }
                 }
-                Console.WriteLine(diagonal);
-                diagonal = "";
+
+                //Console.WriteLine(diagonal);
+                //diagonal = "";
             }
         }
         //-------------------------------------------------------------
