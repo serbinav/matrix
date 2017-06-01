@@ -49,14 +49,14 @@ namespace Matrix
 {
     public class ConsoleApp
     {
-        public int m, n;
+        public uint m, n;
         public char[,] arr;
-        public static int first, second, fourth;
+        public static uint first, second, fourth;
         public static char third;
         //public static List<string> output;
 
         //-------------------------------------------------------------
-        public string findCondition(int i, int j, char symbol, char[,] arr)
+        public string findCondition(uint i, uint j, char symbol, char[,] arr)
         {
             string ret = "";
             if (fourth == 0)
@@ -100,17 +100,17 @@ namespace Matrix
             return str;
         }
         //-------------------------------------------------------------
-        public List<string> horisontalFind(int m, int n, char[,] arr, char symbol)
+        public List<string> horisontalFind(uint m, uint n, char[,] arr, char symbol)
         {
             List<string> ret = new List<string>();
-            for (int i = 0; i < m; i++)
+            for (uint i = 0; i < m; i++)
             {
                 first = default(int);
                 second = default(int);
                 third = new char();
                 fourth = 0;
 
-                for (int j = 0; j < n; j++)
+                for (uint j = 0; j < n; j++)
                 {
                     string find = findCondition(i, j, symbol, arr);
                     if (find != "")
@@ -125,17 +125,17 @@ namespace Matrix
             return ret;
         }
         //-------------------------------------------------------------
-        public List<string> verticalFind(int m, int n, char[,] arr, char symbol)
+        public List<string> verticalFind(uint m, uint n, char[,] arr, char symbol)
         {
             List<string> ret = new List<string>();
-            for (int j = 0; j < n; j++)
+            for (uint j = 0; j < n; j++)
             {
                 first = default(int);
                 second = default(int);
                 third = new char();
                 fourth = 0;
 
-                for (int i = 0; i < m; i++)
+                for (uint i = 0; i < m; i++)
                 {
                     string find = findCondition(i, j, symbol, arr);
                     if (find != "")
@@ -151,25 +151,25 @@ namespace Matrix
 
         }
         //-------------------------------------------------------------
-        public List<string> backslash(int m, int n, char[,] arr, char symbol)
+        public List<string> backslash(uint m, uint n, char[,] arr, char symbol)
         {
             //var 2
-            //string diagonal = "";
+            string diagonal = "";
             List<string> ret = new List<string>();
-            for (int k = m; k >= -m; k--)
+            for (uint k = m; k >= -m; k--)
             {
                 first = default(int);
                 second = default(int);
                 third = new char();
                 fourth = 0;
-                for (int j = 0; j < n - k; j++)
+                for (uint j = 0; j < n - k; j++)
                 {
-                    int i = k + j;
-                    //Console.WriteLine("arr[" + j + " ," + i + "]");
+                    uint i = k + j;
+                    Console.WriteLine("arr[" + j + " ," + i + "]");
 
                     if (i < n && j < m && i >= 0 && j >= 0)
                     {
-                        //diagonal += arr[j, i] + " ";
+                        diagonal += arr[j, i] + " ";
 
                         string find = findCondition(j, i, symbol, arr);
                         if (find != "")
@@ -189,26 +189,26 @@ namespace Matrix
                         }
                     }
                 }
-                //Console.WriteLine(diagonal);
-                //diagonal = "";
+                Console.WriteLine(diagonal);
+                diagonal = "";
             }
             return ret;
         }
         //-------------------------------------------------------------
-        public List<string> slash(int m, int n, char[,] arr, char symbol) {
+        public List<string> slash(uint m, uint n, char[,] arr, char symbol) {
             //var 1
             //string diagonal = "";
             List<string> ret = new List<string>();
-            for (int k = 0; k < m * 2; k++)
+            for (uint k = 0; k < m * 2; k++)
             {
                 first = default(int);
                 second = default(int);
                 third = new char();
                 fourth = 0;
 
-                for (int j = 0; j <= k; j++)
+                for (uint j = 0; j <= k; j++)
                 {
-                    int i = k - j;
+                    uint i = k - j;
                     //Console.WriteLine("arr[" + j + " ," + i + "]");
                     if (i < n && j < m)
                     {
@@ -246,9 +246,22 @@ namespace Matrix
 
             Console.WriteLine("Введите размеры матрицы: ");
             Console.Write("M = ");
-            work.m = int.Parse(Console.ReadLine());
+
+            if (!uint.TryParse(Console.ReadLine(), out work.m))
+            { 
+                Console.WriteLine("Не число");
+                Console.ReadKey();
+                return;
+            }
+
             Console.Write("N = ");
-            work.n = int.Parse(Console.ReadLine());
+
+            if (!uint.TryParse(Console.ReadLine(), out work.n))
+            {
+                Console.WriteLine("Не число");
+                Console.ReadKey();
+                return;
+            }
 
             work.arr = new char[work.m, work.n];
 

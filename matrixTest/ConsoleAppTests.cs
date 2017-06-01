@@ -7,8 +7,8 @@ namespace Matrix.Tests
     [TestClass]
     public class ConsoleAppTests
     {
-        int m = 4;
-        int n = 5;
+        uint m = 4;
+        uint n = 5;
         char[,] exampl = new char[4, 5]{
             { 'b', '=', '=', '=', 'b' },
             { '1', 'b', '2', 'b', 'a' },
@@ -23,8 +23,8 @@ namespace Matrix.Tests
             { 'f', 'f', 'f', 'f', 'f' }
         };
 
-        int i = 4;
-        int j = 4;
+        uint i = 4;
+        uint j = 4;
         char[,] myNo = new char[4, 4]{
             { 'a', 'b', 'c', 'd' },
             { 'e', 'f', 'g', 'h' },
