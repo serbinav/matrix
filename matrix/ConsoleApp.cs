@@ -156,8 +156,9 @@ namespace Matrix
             //var 2
             string diagonal = "";
             List<string> ret = new List<string>();
-            for (uint k = m; k >= -m; k--)
+            for (uint k = m; k >= -m; k--)//            for (uint k = m; k >= -m; k--)
             {
+
                 first = default(int);
                 second = default(int);
                 third = new char();
@@ -167,7 +168,7 @@ namespace Matrix
                     uint i = k + j;
                     Console.WriteLine("arr[" + j + " ," + i + "]");
 
-                    if (i < n && j < m && i >= 0 && j >= 0)
+                    if (i < n && j < m)//&& i >= 0 && j >= 0
                     {
                         diagonal += arr[j, i] + " ";
 
@@ -194,12 +195,25 @@ namespace Matrix
             }
             return ret;
         }
+
         //-------------------------------------------------------------
-        public List<string> slash(uint m, uint n, char[,] arr, char symbol) {
+        public List<string> backslashtest(int m, int n, char[,] arr, char symbol)
+        {
             //var 1
-            //string diagonal = "";
+            string diagonal = "";
             List<string> ret = new List<string>();
-            for (uint k = 0; k < m * 2; k++)
+
+            //cout << "Vyshe glavnoi diagonali nahodyatsya sleduyuschie elementy: ";
+            int k = 4;
+            for (int i = 0; i < k - 1; i++)
+            {
+                for (int j = i + 1; j < k; j++)
+                    //cout << mas[i][j];
+                Console.WriteLine("arr[" + j + " ," + i + "] "+ arr[j, i]);
+
+            }
+            /*
+            for (uint k = 0; k < m * 2; k--) //  for (uint k = 0; k < m * 2; k++)
             {
                 first = default(int);
                 second = default(int);
@@ -209,10 +223,10 @@ namespace Matrix
                 for (uint j = 0; j <= k; j++)
                 {
                     uint i = k - j;
-                    //Console.WriteLine("arr[" + j + " ," + i + "]");
+                    Console.WriteLine("arr[" + j + " ," + i + "]");
                     if (i < n && j < m)
                     {
-                        //diagonal += arr[j, i] + " ";
+                        diagonal += arr[j, i] + " ";
 
                         string find = findCondition(j, i, symbol, arr);
                         if (find != "")
@@ -232,8 +246,55 @@ namespace Matrix
                         }
                     }
                 }
-                //Console.WriteLine(diagonal);
-                //diagonal = "";
+                Console.WriteLine(diagonal);
+                diagonal = "";
+            }
+            */
+            return ret;
+            
+        }
+
+
+        //-------------------------------------------------------------
+        public List<string> slash(uint m, uint n, char[,] arr, char symbol) {
+            //var 1
+            string diagonal = "";
+            List<string> ret = new List<string>();
+            for (uint k = 0; k < m * 2; k++)
+            {
+                first = default(int);
+                second = default(int);
+                third = new char();
+                fourth = 0;
+
+                for (uint j = 0; j <= k; j++)
+                {
+                    uint i = k - j;
+                    Console.WriteLine("arr[" + j + " ," + i + "]");
+                    if (i < n && j < m)
+                    {
+                        diagonal += arr[j, i] + " ";
+
+                        string find = findCondition(j, i, symbol, arr);
+                        if (find != "")
+                            ret.Add(find);
+
+                        if (fourth > 1 && j + 1 > k)
+                        {
+                            ret.Add(printDobLimit(symbol));
+                        }
+                    }
+                    else
+                    {
+                        if (fourth > 1)
+                        {
+                            ret.Add(printDobLimit(symbol));
+                            break;
+                        }
+                    }
+                }
+                Console.WriteLine(diagonal);
+                diagonal = "";
             }
             return ret;
         }
@@ -279,6 +340,18 @@ namespace Matrix
             Console.WriteLine("");     
             Console.WriteLine("Наши результаты: ");
 
+            char[,] myNo = new char[4, 4]{
+            { 'a', 'b', 'c', 'd' },
+            { 'e', 'f', 'g', 'h' },
+            { 'i', 'j', 'k', 'l' },
+            { 'm', 'n', 'o', 'p' }
+            };
+
+            foreach (string str in work.backslashtest(4, 4, myNo, '\\'))
+            {
+                Console.WriteLine(str);
+            }
+            /*
             foreach (string str in work.horisontalFind(work.m, work.n, work.arr, '-'))
             {
                 Console.WriteLine(str);
@@ -291,12 +364,13 @@ namespace Matrix
             {
                 Console.WriteLine(str);
             }
+            
             foreach (string str in work.slash(work.m, work.n, work.arr, '/'))
             {
                 Console.WriteLine(str);
             }
-
-            Console.ReadKey();
+            */
+          Console.ReadKey();
         }
     }
 }
