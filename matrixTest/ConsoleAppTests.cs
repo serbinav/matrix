@@ -59,7 +59,7 @@ namespace Matrix.Tests
         public void backslashFindPositive1()
         {
             ConsoleApp con = new Matrix.ConsoleApp();
-            List<string> test = new List<string>() { "\\ [1 1] b 4", "\\ [3 1] c 2" };
+            List<string> test = new List<string>() { "\\\\ [1 1] b 4", "\\\\ [3 1] c 2" };
             List<string> prog = con.backslash(m, n, exampl, '\\');
 
             CollectionAssert.AreEqual(con.backslash(m, n, exampl, '\\'), test);
@@ -69,7 +69,7 @@ namespace Matrix.Tests
         public void slashFindPositive1()
         {
             ConsoleApp con = new Matrix.ConsoleApp();
-            List<string> test = new List<string>() { "/ [1 5] b 3", "/ [2 5] a 3" };
+            List<string> test = new List<string>() { "/ [1 5] b 3", "// [2 5] a 3" };
             List<string> prog = con.slash(m, n, exampl, '/');
 
             CollectionAssert.AreEqual(con.slash(m, n, exampl, '/'), test);
@@ -104,8 +104,8 @@ namespace Matrix.Tests
         public void backslashFindPositive2()
         {
             ConsoleApp con = new Matrix.ConsoleApp();
-            List<string> test = new List<string>() { "\\\\ [1 1] b 4", "\\\\ [3 1] c 2",
-            "\\\\ [3 1] c 2", "\\\\ [3 1] c 2", "\\\\ [3 1] c 2", "\\\\ [3 1] c 2"};
+            List<string> test = new List<string>() { "\\\\ [1 1] f 2", "\\\\ [3 1] f 3",
+            "\\\\ [3 1] f 4", "\\\\ [3 1] f 4", "\\\\ [3 1] f 3", "\\\\ [3 1] f 2"};
             List<string> prog = con.backslash(m, n, myYes, '\\');
 
             CollectionAssert.AreEqual(con.backslash(m, n, myYes, '\\'), test);
@@ -115,14 +115,29 @@ namespace Matrix.Tests
         public void slashFindPositive2()
         {
             ConsoleApp con = new Matrix.ConsoleApp();
-            List<string> test = new List<string>() { "// [1 5] b 3", "/ [2 5] a 3",
-            "/ [3 1] c 2","// [3 1] c 2","// [3 1] c 2","// [3 1] c 2",};
+            List<string> test = new List<string>() { "// [1 5] f 2", "// [2 5] f 3",
+            "// [3 1] f 4","// [3 1] f 4","// [3 1] f 3","// [3 1] f 2",};
             List<string> prog = con.slash(m, n, myYes, '/');
 
             CollectionAssert.AreEqual(con.slash(m, n, myYes, '/'), test);
         }
 
         //-------------------------------------------------------------
+
+/*
+\\ [1 4] f 2
+\\ [1 3] f 3
+\\ [1 2] f 4
+\\ [1 1] f 4
+\\ [2 1] f 3
+\\ [3 1] f 2
+*/
+// [1 2] f 2
+// [1 3] f 3
+// [1 4] f 4
+// [1 5] f 4
+// [2 5] f 3
+// [3 5] f 2
 
         [TestMethod]
         public void horisontalFindNegative1()

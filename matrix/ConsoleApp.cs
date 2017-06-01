@@ -171,7 +171,7 @@ namespace Matrix
                     {
                         //diagonal += arr[j, i] + " ";
 
-                        string find = findCondition(i, j, symbol, arr);
+                        string find = findCondition(j, i, symbol, arr);
                         if (find != "")
                             ret.Add(find);
 
@@ -214,7 +214,7 @@ namespace Matrix
                     {
                         //diagonal += arr[j, i] + " ";
 
-                        string find = findCondition(i, j, symbol, arr);
+                        string find = findCondition(j, i, symbol, arr);
                         if (find != "")
                             ret.Add(find);
 
@@ -245,7 +245,7 @@ namespace Matrix
             // TODO добавить проверки на соответствие типов данных
 
             ConsoleApp work = new ConsoleApp();
-
+            /*
             Console.WriteLine("Введите размеры матрицы: ");
             Console.Write("M = ");
             work.m = int.Parse(Console.ReadLine());
@@ -264,6 +264,17 @@ namespace Matrix
                 }
                 Console.WriteLine();
             }
+            */
+
+            work.m = 4;
+            work.n = 5;
+
+            work.arr = new char[4, 5]{
+            { 'f', 'f', 'f', 'f', 'f' },
+            { 'f', 'f', 'f', 'f', 'f' },
+            { 'f', 'f', 'f', 'f', 'f' },
+            { 'f', 'f', 'f', 'f', 'f' }
+            };
 
             Console.WriteLine("");     
             Console.WriteLine("Наши результаты: ");
