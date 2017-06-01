@@ -240,12 +240,10 @@ namespace Matrix
         //-------------------------------------------------------------
         static void Main(string[] args)
         {
-            // TODO протестировать определение начальной точки
-            // TODO протестировать на кирилице 
             // TODO добавить проверки на соответствие типов данных
 
             ConsoleApp work = new ConsoleApp();
-            /*
+
             Console.WriteLine("Введите размеры матрицы: ");
             Console.Write("M = ");
             work.m = int.Parse(Console.ReadLine());
@@ -264,17 +262,6 @@ namespace Matrix
                 }
                 Console.WriteLine();
             }
-            */
-
-            work.m = 4;
-            work.n = 5;
-
-            work.arr = new char[4, 5]{
-            { 'f', 'f', 'f', 'f', 'f' },
-            { 'f', 'f', 'f', 'f', 'f' },
-            { 'f', 'f', 'f', 'f', 'f' },
-            { 'f', 'f', 'f', 'f', 'f' }
-            };
 
             Console.WriteLine("");     
             Console.WriteLine("Наши результаты: ");
