@@ -1,4 +1,7 @@
 # my
+*.xlsx
+
+
 # User-specific files
 *.suo
 *.user
@@ -32,7 +35,6 @@ build/
 *.meta
 *.obj
 *.pch
-*.pdb
 *.pgc
 *.pgd
 *.rsp
@@ -40,7 +42,6 @@ build/
 *.tlb
 *.tli
 *.tlh
-*.tmp
 *.tmp_proj
 *.log
 *.vspscc
@@ -73,9 +74,6 @@ ipch/
 # ReSharper is a .NET coding add-in
 _ReSharper*/
 *.[Rr]e[Ss]harper
-
-# TeamCity is a build add-in
-_TeamCity*
 
 # DotCover is a Code Coverage Tool
 *.dotCover
@@ -151,7 +149,6 @@ UpgradeLog*.htm
 **/App_Data/*.mdf
 **/App_Data/*.ldf
 **/App_Data/*.sdf
-
 
 #LightSwitch generated files
 GeneratedArtifacts/
@@ -249,8 +246,6 @@ $RECYCLE.BIN/
 .VolumeIcon.icns
 
 # Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
 Network Trash Folder
 Temporary Items
 .apdisk
@@ -276,3 +271,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.tmp
+*.pdb
